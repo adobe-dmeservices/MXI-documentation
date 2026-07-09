@@ -7,7 +7,13 @@ import {
   STEPS,
   defaultState,
 } from "./products.js";
-import { parseMxi } from "./mxi-parser.js?v=3";
+import { parseMxi } from "./mxi-parser.js?v=5";
+import {
+  initContentEditors,
+  syncRichEditorsToState,
+  htmlIsEmpty,
+  normalizeHtml,
+} from "./rich-editor.js?v=5";
 
 const REFERENCE_URL =
   "https://github.com/adobe-dmeservices/MXI-documentation/blob/main/reference/supported-applications.md";
@@ -124,7 +130,7 @@ function buildUpdateXml() {
 }
 
 function buildDescriptionXml() {
-  const text = state.description.trim();
+  const text = normalizeHtml(state.description);
   if (!text) return `    <description/>`;
   if (state.useCdata) {
     return `    <description>\n        <![CDATA[${text}]]>\n    </description>`;
@@ -132,8 +138,17 @@ function buildDescriptionXml() {
   return `    <description>${esc(text)}</description>`;
 }
 
+function buildLicenseXml() {
+  const text = normalizeHtml(state.license);
+  if (!text) return `    <license-agreement/>`;
+  if (state.licenseUseCdata) {
+    return `    <license-agreement>\n        <![CDATA[${text}]]>\n    </license-agreement>`;
+  }
+  return `    <license-agreement>${esc(text)}</license-agreement>`;
+}
+
 function buildUiAccessXml() {
-  const text = state.uiAccess.trim();
+  const text = normalizeHtml(state.uiAccess);
   if (!text) return "";
   return `    <ui-access>\n        <![CDATA[${text}]]>\n    </ui-access>`;
 }
@@ -161,7 +176,7 @@ function buildXml() {
     "",
     buildDescriptionXml(),
     "",
-    `    <license-agreement>${esc(state.license)}</license-agreement>`,
+    buildLicenseXml(),
   ];
 
   const uiAccess = buildUiAccessXml();
@@ -364,16 +379,23 @@ function renderProducts() {
 function renderContent() {
   return `
     <div class="field-grid single-col">
-      <label>Description <span class="req">*</span>
-        <textarea data-field="description" rows="5">${esc(state.description)}</textarea>
-        <label class="checkbox-inline"><input type="checkbox" data-field="useCdata" ${state.useCdata ? "checked" : ""}> Wrap in CDATA (recommended)</label>
-      </label>
-      <label>License agreement <span class="req">*</span>
-        <textarea data-field="license" rows="3">${esc(state.license)}</textarea>
-      </label>
-      <label>UI access text <span class="optional">optional</span>
-        <textarea data-field="uiAccess" rows="3" placeholder="Where to find this extension in the product UI">${esc(state.uiAccess)}</textarea>
-      </label>
+      <div class="field-block">
+        <span class="field-label">Description <span class="req">*</span></span>
+        <p class="help">HTML formatted text shown in Extension Manager. Stored in a CDATA section in the MXI file.</p>
+        <div id="description-editor" class="rich-editor"></div>
+        <label class="checkbox-field"><input type="checkbox" data-field="useCdata" ${state.useCdata ? "checked" : ""}> Wrap description in CDATA (recommended)</label>
+      </div>
+      <div class="field-block">
+        <span class="field-label">License agreement <span class="req">*</span></span>
+        <p class="help">License text displayed during installation. HTML is supported via CDATA.</p>
+        <div id="license-editor" class="rich-editor rich-editor-compact"></div>
+        <label class="checkbox-field"><input type="checkbox" data-field="licenseUseCdata" ${state.licenseUseCdata ? "checked" : ""}> Wrap license in CDATA (recommended)</label>
+      </div>
+      <div class="field-block">
+        <span class="field-label">UI access text <span class="optional">optional</span></span>
+        <p class="help">HTML instructions for finding the extension in the product UI (512 character limit in Extension Manager).</p>
+        <div id="ui-access-editor" class="rich-editor rich-editor-compact"></div>
+      </div>
     </div>`;
 }
 
@@ -474,8 +496,8 @@ function validateState() {
   if (!state.name.trim()) issues.push("Display name is required.");
   if (!state.version.trim()) issues.push("Version is required.");
   if (!state.author.trim()) issues.push("Author is required.");
-  if (!state.description.trim()) issues.push("Description is required.");
-  if (!state.license.trim()) issues.push("License agreement is required.");
+  if (htmlIsEmpty(state.description)) issues.push("Description is required.");
+  if (htmlIsEmpty(state.license)) issues.push("License agreement is required.");
   if (!state.products.length) issues.push("At least one product is required.");
   state.products.forEach((p, i) => {
     if (!p.version.trim()) issues.push(`Product ${i + 1}: min version is required.`);
@@ -494,6 +516,8 @@ function renderStepList() {
 }
 
 function render() {
+  syncRichEditorsToState(state);
+
   const step = STEPS[currentStep];
   stepTitleEl.textContent = step.title;
   stepHintEl.textContent = step.hint;
@@ -516,6 +540,14 @@ function render() {
   downloadBtn.disabled = validateState().length > 0;
   saveState();
   bindFormEvents();
+
+  if (step.id === "content") {
+    initContentEditors(state, () => {
+      previewEl.textContent = buildXml();
+      saveState();
+      downloadBtn.disabled = validateState().length > 0;
+    });
+  }
 }
 
 function bindFormEvents() {

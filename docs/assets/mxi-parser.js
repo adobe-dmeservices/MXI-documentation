@@ -119,6 +119,7 @@ export function parseMxi(xmlText) {
     description: description.text,
     useCdata: description.useCdata || description.text.includes("<"),
     license: license.text,
+    licenseUseCdata: license.useCdata || license.text.includes("<"),
     uiAccess: uiAccess.text,
     products: products.length ? products : defaultState().products,
     files: files.length ? files : defaultState().files,
