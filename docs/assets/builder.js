@@ -25,7 +25,6 @@ const nextBtn = document.getElementById("btn-next");
 const downloadBtn = document.getElementById("btn-download");
 const copyBtn = document.getElementById("btn-copy");
 const loadExampleBtn = document.getElementById("btn-load-example");
-const uploadBtn = document.getElementById("btn-upload-mxi");
 const uploadInput = document.getElementById("mxi-upload-input");
 const importStatusEl = document.getElementById("import-status");
 
@@ -636,7 +635,7 @@ copyBtn.addEventListener("click", async () => {
   }, 1500);
 });
 
-loadExampleBtn.addEventListener("click", () => {
+loadExampleBtn?.addEventListener("click", () => {
   loadExampleState({
     id: "com.wedia.wxm",
     name: "Wedia CC PlugIns",
@@ -660,11 +659,8 @@ loadExampleBtn.addEventListener("click", () => {
   });
 });
 
-uploadBtn.addEventListener("click", () => uploadInput.click());
-
-uploadInput.addEventListener("change", async () => {
+uploadInput?.addEventListener("change", async () => {
   const file = uploadInput.files?.[0];
-  uploadInput.value = "";
   if (!file) return;
 
   try {
@@ -673,6 +669,8 @@ uploadInput.addEventListener("change", async () => {
     applyImportedState(parsed, file.name);
   } catch (err) {
     showImportStatus(err.message || "Failed to load MXI file.", true);
+  } finally {
+    uploadInput.value = "";
   }
 });
 
