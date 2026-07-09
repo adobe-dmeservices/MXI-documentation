@@ -130,8 +130,8 @@ def main() -> None:
         "-o",
         "--output",
         type=Path,
-        default=Path("docs"),
-        help="Output directory for Markdown files (default: docs)",
+        default=Path("reference"),
+        help="Output directory for Markdown files (default: reference)",
     )
     args = parser.parse_args()
 

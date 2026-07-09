@@ -8,6 +8,9 @@ import {
   defaultState,
 } from "./products.js";
 
+const REFERENCE_URL =
+  "https://github.com/adobe-dmeservices/MXI-documentation/blob/main/reference/supported-applications.md";
+
 const state = loadState();
 let currentStep = 0;
 
@@ -236,7 +239,7 @@ function renderProducts() {
           </label>
           <label>Min version <span class="req">*</span>
             <input type="text" data-product-field="version" value="${esc(product.version)}" placeholder="21">
-            <span class="help">Internal major version — see <a href="supported-applications.md">version table</a></span>
+            <span class="help">Internal major version — see <a href="${REFERENCE_URL}" target="_blank" rel="noopener">version table</a></span>
           </label>
           <label>Max version
             <input type="text" data-product-field="maxversion" value="${esc(product.maxversion)}" placeholder="26.99">
@@ -265,7 +268,7 @@ function renderProducts() {
     <p class="intro">Select which Adobe applications can install this extension. MXI product names differ from CEP Host IDs used in <code>manifest.xml</code>.</p>
     <div id="products-list">${cards}</div>
     <button type="button" class="btn-secondary" id="btn-add-product">+ Add product</button>
-    <p class="note">CEP-only hosts not in archived MXI docs: ${esc(cepNote)}. See <a href="supported-applications.md">supported applications</a>.</p>`;
+    <p class="note">CEP-only hosts not in archived MXI docs: ${esc(cepNote)}. See <a href="${REFERENCE_URL}" target="_blank" rel="noopener">supported applications</a>.</p>`;
 }
 
 function renderContent() {

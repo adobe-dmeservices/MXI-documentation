@@ -1,6 +1,6 @@
 /**
  * MXI product and CEP host reference data.
- * Sources: docs/supported-applications.md, CEP 12 HTML Extension Cookbook.
+ * Sources: reference/supported-applications.md, CEP 12 HTML Extension Cookbook.
  */
 export const PRODUCTS = [
   {

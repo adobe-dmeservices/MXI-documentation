@@ -125,4 +125,4 @@ From the CEP 12 cookbook (marketing version → CEP runtime):
 - [General MXI elements](general-mxi-elements.md) — full element reference
 - [Path tokens](path-tokens.md) — destination path variables per application
 - [Example MXI](https://github.com/adobe-dmeservices/MXI-documentation/blob/main/examples/com.wedia.wxm.mxi) — real-world multi-product package
-- [MXI Builder](builder.html) — interactive wizard to generate an MXI file
+- [MXI Builder](https://adobe-dmeservices.github.io/MXI-documentation/) — interactive wizard to generate an MXI file

@@ -3,66 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MXI Documentation</title>
+  <title>MXI Builder</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">MXI Documentation</a>
+    <a class="brand" href="index.html">MXI Builder</a>
     <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="builder.html">Builder</a>
-      <a href="supported-applications.md">Applications</a>
-      <a href="https://github.com/adobe-dmeservices/MXI-documentation">GitHub</a>
+      <a href="https://github.com/adobe-dmeservices/MXI-documentation">Documentation on GitHub</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>MXI format documentation</h1>
-    <p>
-      Preserved documentation for the MXI installer format used by Adobe Extension Manager and Exchange.
-      Build a new <code>.mxi</code> file with the interactive wizard, or browse the archived reference docs.
-    </p>
-    <p style="margin-top: 1.25rem;">
-      <a class="btn btn-primary" href="builder.html">Open MXI Builder</a>
-    </p>
-  </section>
+  <main class="builder-layout">
+    <aside class="builder-sidebar">
+      <h2>Steps</h2>
+      <ol id="step-list"></ol>
+      <p class="help" style="margin-top: 1rem;">Work through each section to build your <code>.mxi</code> file line by line. The XML preview updates live.</p>
+      <button type="button" class="btn-secondary" id="btn-load-example" style="margin-top: 0.75rem; width: 100%;">Load Wedia example</button>
+    </aside>
 
-  <section class="card-grid">
-    <article class="card">
-      <h2>MXI Builder</h2>
-      <p>Step-by-step wizard with dropdowns and fill-in-the-blank fields. Live XML preview and download.</p>
-      <a class="btn btn-secondary" href="builder.html">Create an MXI</a>
-    </article>
+    <section class="builder-panel">
+      <div class="panel-header">
+        <h1 id="step-title"></h1>
+        <p id="step-hint"></p>
+      </div>
+      <form id="wizard-form" onsubmit="return false;"></form>
+      <div class="wizard-footer">
+        <button type="button" class="btn-secondary" id="btn-prev">Back</button>
+        <button type="button" class="btn-primary" id="btn-next">Next</button>
+      </div>
+    </section>
 
-    <article class="card">
-      <h2>Supported applications</h2>
-      <p>MXI product identifiers cross-referenced with CEP Host IDs from the CEP 12 cookbook.</p>
-      <a class="btn btn-secondary" href="supported-applications.md">View reference</a>
-    </article>
+    <aside class="preview-panel">
+      <div class="preview-header">
+        <h2>Live XML preview</h2>
+        <div class="preview-actions">
+          <button type="button" class="btn-secondary" id="btn-copy">Copy XML</button>
+          <button type="button" class="btn-primary" id="btn-download">Download .mxi</button>
+        </div>
+      </div>
+      <pre id="xml-preview"></pre>
+    </aside>
+  </main>
 
-    <article class="card">
-      <h2>Examples</h2>
-      <p>Real-world and minimal <code>.mxi</code> samples in the GitHub repository.</p>
-      <a class="btn btn-secondary" href="https://github.com/adobe-dmeservices/MXI-documentation/tree/main/examples">Browse examples</a>
-    </article>
-  </section>
-
-  <section class="card-grid" style="padding-top: 0;">
-    <article class="card" style="grid-column: 1 / -1;">
-      <h2>Reference documentation</h2>
-      <p>Converted from archived Adobe HelpX pages (Extension Manager CC era).</p>
-      <ul class="doc-list">
-        <li><a href="configuration-file-reference.md">Configuration file reference</a></li>
-        <li><a href="mxi-element-summary.md">MXI element summary</a></li>
-        <li><a href="general-mxi-elements.md">General MXI elements</a></li>
-        <li><a href="product-specific-mxi-elements.md">Product-specific MXI elements</a></li>
-        <li><a href="location-specification.md">Location specification</a></li>
-        <li><a href="path-tokens.md">Path tokens</a></li>
-        <li><a href="xml-coding-best-practices.md">XML coding best practices</a></li>
-        <li><a href="creating-multilingual-extension-packages.md">Multilingual extension packages</a></li>
-      </ul>
-    </article>
-  </section>
+  <script type="module" src="assets/builder.js"></script>
 </body>
 </html>
