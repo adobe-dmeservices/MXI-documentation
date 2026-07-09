@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension id="com.wedia.wxm" name="Wedia CC PlugIns" version="2024.5.0" force-quit="true" requires-restart="true">
+    <author name="Wedia"/>
+    <products>
+        <product familyname="InDesign" version="17" maxversion="20.99"/>
+        <!-- <product familyname="InDesign64" version="16" maxversion="18.9"/> -->
+        <product familyname="Photoshop" version="21" maxversion="26.99"/>
+        <product familyname="Illustrator" version="24" maxversion="29.99"/>
+    </products>
+    <description>Wedia Digital Asset Management and Web-to-Print PlugIns</description>
+    <license-agreement>Copyright 2024 Wedia All rights reserved.</license-agreement>
+    <files>
+        <file source="WediaForCC18/win/WediaForCC18.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="18" maxVersion="18.9"/>
+        <file source="WediaForCC18/win/WediaForCC18UI.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="18" maxVersion="18.9"/>
+        <file source="WediaForCC18/win/(WediaForCC18 Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="18" maxVersion="18.9"/>
+        <file source="WediaForCC18/win/(WediaForCC18UI Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="18" maxVersion="18.9"/>
+        <file source="iBramsDylationCC2023/win/iBramsDylation.pln" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" file-type="plugin" minVersion="18" maxVersion="18.9"/>
+        <file source="iBramsDylationCC2023/win/(iBramsDylation Resources)" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" minVersion="18" maxVersion="18.9"/>
+
+        <file source="WediaForCC19/win/WediaForCC19.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="19" maxVersion="19.9"/>
+        <file source="WediaForCC19/win/WediaForCC19UI.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="19" maxVersion="19.9"/>
+        <file source="WediaForCC19/win/(WediaForCC19 Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="19" maxVersion="19.9"/>
+        <file source="WediaForCC19/win/(WediaForCC19UI Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="19" maxVersion="19.9"/>
+        <file source="iBramsDylationCC2024/win/iBramsDylation.pln" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" file-type="plugin" minVersion="19" maxVersion="19.9"/>
+        <file source="iBramsDylationCC2024/win/(iBramsDylation Resources)" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" minVersion="19" maxVersion="19.9"/>
+
+        <file source="WediaForCC20/win/WediaForCC20.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="20" maxVersion="20.9"/>
+        <file source="WediaForCC20/win/WediaForCC20UI.pln" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" file-type="plugin" minVersion="20" maxVersion="20.9"/>
+        <file source="WediaForCC20/win/(WediaForCC20 Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="20" maxVersion="20.9"/>
+        <file source="WediaForCC20/win/(WediaForCC20UI Resources)" products="InDesign64" destination="$indesign/Plug-Ins/Wedia" platform="win" minVersion="20" maxVersion="20.9"/>
+        <file source="iBramsDylationCC2025/win/iBramsDylation.pln" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" file-type="plugin" minVersion="20" maxVersion="20.9"/>
+        <file source="iBramsDylationCC2025/win/(iBramsDylation Resources)" products="InDesign64" destination="$indesign/Plug-Ins/iBramsDylation" platform="win" minVersion="20" maxVersion="20.9"/>
+
+        <file source="./WediaForCC18/mac/WediaForCC18.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="18" maxVersion="18.9"/>
+        <file source="./WediaForCC18/mac/WediaForCC18UI.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="18" maxVersion="18.9"/>
+        <file source="./iBramsDylationCC2023/mac/iBramsDylation.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/iBramsDylation" platform="mac" minVersion="18" maxVersion="18.9"/>
+
+        <file source="./WediaForCC19/mac/WediaForCC19.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="19" maxVersion="19.9"/>
+        <file source="./WediaForCC19/mac/WediaForCC19UI.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="19" maxVersion="19.9"/>
+        <file source="./iBramsDylationCC2024/mac/iBramsDylation.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/iBramsDylation" platform="mac" minVersion="19" maxVersion="19.9"/>
+
+        <file source="./WediaForCC20/mac/WediaForCC20.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="20" maxVersion="20.9"/>
+        <file source="./WediaForCC20/mac/WediaForCC20UI.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/Wedia" platform="mac" file-type="plugin" minVersion="20" maxVersion="20.9"/>
+        <file source="./iBramsDylationCC2025/mac/iBramsDylation.InDesignPlugin" products="InDesign" destination="$indesign/Plug-Ins/iBramsDylation" platform="mac" minVersion="20" maxVersion="20.9"/>
+
+        <file source="./WediaForPSCC/mac/" products="Photoshop" destination="$pluginsfolder/Wedia" platform="mac" file-type="plugin" minVersion="21" maxVersion="26.9"/>
+        <file source="./WediaForPSCC/win/" products="Photoshop" destination="$pluginsfolder/Wedia" platform="win" file-type="plugin" minVersion="21" maxVersion="26.9"/>
+        
+        <file source="com.wedia.dam.connector.zxp" file-type="csxs" minVersion="18" maxVersion="20.9"/>
+        <!-- <file source="WediaDylationCEPPanel.zxp" file-type="csxs" minVersion="18" maxVersion="20.9"/> -->
+        <file source="com.wedia.snippets.connector.zxp" file-type="csxs" minVersion="18" maxVersion="20.9"/>
+        <file source="Wedia.idpp" file-type="ordinary" minVersion="18" maxVersion="20.9" destination="$adobecommon/Preflight Profiles/"/>
+
+        <file source="./uxp/com.wedia.uxp.dylation_24.5.0" file-type="ordinary" minVersion="20" maxVersion="20.9" destination="$userroamingfolder/Adobe/UXP/Plugins/External/"/>
+        <!-- <file source="ID.json" file-type="ordinary" minVersion="20" maxVersion="20.9" destination="$userroamingfolder/Adobe/UXP/PluginsInfo/v1/"/> -->
+        
+    </files>
+</macromedia-extension>

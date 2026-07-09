@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension
+    id="com.example.my-extension"
+    name="My Extension"
+    version="1.0.0"
+    force-quit="false"
+    requires-restart="false">
+
+    <author name="Your Name"/>
+
+    <products>
+        <product familyname="Photoshop" version="21" maxversion="26.99"/>
+        <product familyname="InDesign" version="17" maxversion="20.99"/>
+    </products>
+
+    <description>
+        <![CDATA[A short description of what this extension does.]]>
+    </description>
+
+    <license-agreement>Copyright 2024 Example Corp. All rights reserved.</license-agreement>
+
+    <files>
+        <file source="my-extension.zxp" file-type="csxs" minVersion="17" maxVersion="20.9"/>
+        <file source="readme.txt" file-type="ordinary" destination="$ExtensionSpecificEMStore"/>
+    </files>
+
+</macromedia-extension>
