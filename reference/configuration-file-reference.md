@@ -8,6 +8,8 @@ MXI is an XML schema that specifies various attributes of an extension. This doc
 
 Target applications for extensions include:
 
+- Audition®
+- Bridge®
 - Dreamweaver®
 - Flash Professional®
 - Photoshop®
@@ -15,6 +17,7 @@ Target applications for extensions include:
 - InDesign®
 - InCopy®
 - Premiere Pro®
+- After Effects®
 - Prelude®
 - Captivate®
 

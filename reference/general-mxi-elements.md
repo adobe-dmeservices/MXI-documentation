@@ -32,7 +32,7 @@ Attributes: `name`
 
 ## Example
 
-```
+``` xml
 <dependency>
     <extension name="Sample1" />
     <extension name="Sample2" />
@@ -49,7 +49,7 @@ The contents of the element must contain a CDATA section, which you can format w
 
 To display double-byte characters, include "charset=UTF-8". Example:
 
-```
+``` xml
 <description>
     <![CDATA[<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"><br>
     This is a sample Exchange item.<br>
@@ -85,15 +85,19 @@ Optional. A container for one or more file elements that describe specific files
 
 To create an extension as part of a bundle or framework in Mac OS, use a format like the following, without wild cards:
 
-`<files>
+``` xml
+<files>
     <file source="sourceFolder" destination="$photoshop/" />
-</files>`
+</files>
+```
 
 or
 
-`<files>
+``` xml
+<files>
     <file source="sourceFolder/" destination="$photoshop/" />
-</files>`
+</files>
+```
 
 Attributes: `[xml:lang, products, default-file-type]`
 
@@ -111,11 +115,9 @@ Optional. The products for which these files should be installed. If not specifi
 
 Optional. The default type of the contained files. One of:
 
-`- csxs`: A CS extension package.
-
-`- plugin`: A native plug-in.
-
-`- ordinary`: Ordinary files receive no special processing by Extension Manager.
+- `csxs`: A CS extension package.
+- `plugin`: A native plug-in.
+- `ordinary`: Ordinary files receive no special processing by Extension Manager.
 
 This value is overridden by the file-type attribute of a contained file.
 
@@ -131,7 +133,9 @@ Required. The file name, and the path in which it is found relative to the insta
 
 If all files in a folder have to be installed to the same destination folder, you don't have to add all files individually. Put a slash at the end of folder name when specifying source attribute, then all files in that folder will be packaged into the extension. For example, if the folder name is "Resources", the following line will cause all files in this folder copied to the destination folder:
 
-`<file source="Resources/" destination="$dreamweaver/configuration/Resources"/>`
+``` xml
+<file source="Resources/" destination="$dreamweaver/configuration/Resources"/>
+```
 
 `destination`
 
@@ -178,9 +182,7 @@ Place resource files in a folder with the name installerPrefix.mxi\_Resources. W
 Optional. The file type. One of:
 
 - `csxs` : A CS extension package.
-
 - `plugin`: A native plug-in.
-
 - `ordinary`: Ordinary files receive no special processing by Extension Manager.
 
 Default is the value specified in the container files element.
@@ -200,11 +202,11 @@ Optional. A Container tag that indicates any custom tokens.
 Contents
 One or more token tags for defining custom tokens. For example,
 
-`<file-tokens>`
-
-`<!-- token tags go here -->`
-
-`</file-token>`
+``` xml
+<file-tokens>
+  <!-- token tags go here -->
+</file-token>
+```
 
 **token**
 
@@ -220,15 +222,17 @@ You cannot redefine the `$Dreamweaver`, `$Flash`, `$fonts`, `$system` token or o
 
 **Attributes**
 
-Name
+**Name**
 
 The name of your custom token. This must be a unique name. Do not include the dollar sign ($) in the name.
 
-Definition
+**Definition**
 
 Defines the file path of the token. Since the absolute path is platform specific, you should use "platform" attribute of "product" or "file" tag to specify the file should be installed in only Windows or only Mac. In the example below, all files using the token $airstream are installed in C:\program files\trailer.
 
-`<token name = "airstream" definition = "C:\program files\trailer"/>`
+``` xml
+<token name = "airstream" definition = "C:\program files\trailer"/>
+```
 
 # license-agreement
 
@@ -244,7 +248,7 @@ Attributes: `[resid]`
 
 Example:
 
-```
+``` xml
 <license-agreement>
     <![CDATA[You are about to install an Extension from the Adobe Exchange.
     The Adobe Exchange is an area of the adobe.com website that allows third parties to submit extensions for posting to adobe.com.]]>
@@ -263,21 +267,9 @@ If you are installing files, it must contain these elements:
 
 Optional contained elements:
 
-> `author`
+> `author, dependency, description, license-agreement, ui-access, update, file-tokens`
 
-> `dependency`
-
-> `description`
-
-> `license-agreement`
-
-> `ui-access`
-
-> `update`
-
-> `file-tokens`
-
-Attibures: `id, name, version, [icon, force-quit, ismultilingual, name_resid, type, plugin-manager-type]`
+Attributes: `id, name, version, [icon, force-quit, ismultilingual, name_resid, type, plugin-manager-type]`
 
 `id`
 
@@ -327,7 +319,7 @@ Attibures: `id, name, version, [icon, force-quit, ismultilingual, name_resid, ty
 
 Example:
 
-```
+``` xml
 <macromedia-extension
     name = "My Command"
     version = "1.0.0"
@@ -350,39 +342,26 @@ Attribures (child element): `name, [version, required, maxversion, familyname, p
 
 > Required, except when familyname is supplied. The name of an Adobe product, a VARCHAR2 data type with a limit of 64 characters. One of:
 
-> Dreamweaver
-
-> Flash
-
-> Illustrator (Illustrator on Mac)
-
-> Illustrator32 (32-bit Illustrator on Windows)
-
-> Illustrator64 (64-bit Illustrator on Windows)
-
-> InCopy (InCopy in Mac OS)
-
-> InCopy32 (32-bit InCopy in Windows)
-
-> InCopy64(64-bit InCopy in Windows)
-
-> InDesign (InDesign in Mac OS)
-
-> InDesign32 (32-bit InDesign in Windows)
-
-> InDesign64(64-bit InDesign in Windows)
-
-> LightroomClassic
-
-> Photoshop (Photoshop on Mac)
-
-> Photoshop32 (32-bit Photoshop on Windows)
-
-> Photoshop64 (64-bit Photoshop on Windows)
-
-> Prelude
-
-> Premiere
+> - Bridge
+> - Audition
+> - Dreamweaver
+> - Flash
+> - Illustrator (Illustrator on Mac)
+> - Illustrator32 (32-bit Illustrator on Windows)
+> - Illustrator64 (64-bit Illustrator on Windows)
+> - InCopy (InCopy in Mac OS)
+> - InCopy32 (32-bit InCopy in Windows)
+> - InCopy64(64-bit InCopy in Windows)
+> - InDesign (InDesign in Mac OS)
+> - InDesign32 (32-bit InDesign in Windows)
+> - InDesign64(64-bit InDesign in Windows)
+> - LightroomClassic
+> - Photoshop (Photoshop on Mac)
+> - Photoshop32 (32-bit Photoshop on Windows)
+> - Photoshop64 (64-bit Photoshop on Windows)
+> - Prelude
+> - Premiere
+> - AfterEffects
 
 `version`
 
@@ -435,6 +414,9 @@ Attribures (child element): `name, [version, required, maxversion, familyname, p
 | Prelude CS6 | 1 |
 | Prelude CC | 2 |
 | Prelude CC 2014 | 3 |
+|  |  |
+| Bridge CC | 9 |
+
 
 `required`
 
@@ -470,7 +452,7 @@ Attribure: `[resid]`
 
 Example:
 
-```
+``` xml
 <ui-access>
     <![CDATA[You can run this extension by choosing<br>
         <b>Commands > Run My Extension.</b>]]>

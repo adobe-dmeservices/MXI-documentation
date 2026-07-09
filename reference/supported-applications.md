@@ -81,7 +81,7 @@ See [General MXI elements](general-mxi-elements.md#products) for the complete hi
 
 ## CEP 12 host version reference
 
-From the CEP 12 cookbook (marketing version → CEP runtime):
+From the [CEP 12 cookbook](https://github.com/Adobe-CEP/CEP-Resources/tree/master/CEP_12.x) (marketing version → CEP runtime):
 
 | Application | Host ID | CC 2019 | CC 2020 | FY 2024 |
 | --- | --- | --- | --- | --- |
