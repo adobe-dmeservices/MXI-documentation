@@ -7,6 +7,7 @@ import {
   STEPS,
   defaultState,
 } from "./products.js";
+import { parseMxi } from "./mxi-parser.js";
 
 const REFERENCE_URL =
   "https://github.com/adobe-dmeservices/MXI-documentation/blob/main/reference/supported-applications.md";
@@ -24,6 +25,9 @@ const nextBtn = document.getElementById("btn-next");
 const downloadBtn = document.getElementById("btn-download");
 const copyBtn = document.getElementById("btn-copy");
 const loadExampleBtn = document.getElementById("btn-load-example");
+const uploadBtn = document.getElementById("btn-upload-mxi");
+const uploadInput = document.getElementById("mxi-upload-input");
+const importStatusEl = document.getElementById("import-status");
 
 function loadState() {
   try {
@@ -173,11 +177,47 @@ function buildXml() {
   return parts.join("\n");
 }
 
-function productOptions(selectedFamily) {
-  return PRODUCTS.map(
-    (p) =>
-      `<option value="${esc(p.familyname || p.names[0])}" ${p.familyname === selectedFamily || p.names[0] === selectedFamily ? "selected" : ""}>${esc(p.label)} (CEP: ${p.cepHosts.join("/")})</option>`
-  ).join("");
+function productOptions(selectedValue) {
+  const selected = selectedValue || "";
+  const isKnown = (p) =>
+    p.familyname === selected ||
+    p.names[0] === selected ||
+    p.names.includes(selected);
+
+  const options = PRODUCTS.map((p) => {
+    const value = p.familyname || p.names[0];
+    const isSelected =
+      p.familyname === selected ||
+      p.names.includes(selected) ||
+      value === selected;
+    return `<option value="${esc(value)}" ${isSelected ? "selected" : ""}>${esc(p.label)} (CEP: ${p.cepHosts.join("/")})</option>`;
+  }).join("");
+
+  if (selected && !PRODUCTS.some(isKnown)) {
+    return `<option value="${esc(selected)}" selected>${esc(selected)} (custom)</option>${options}`;
+  }
+
+  return options;
+}
+
+function showImportStatus(message, isError = false) {
+  if (!importStatusEl) return;
+  importStatusEl.hidden = false;
+  importStatusEl.textContent = message;
+  importStatusEl.classList.toggle("error", isError);
+}
+
+function applyImportedState(parsed, sourceLabel) {
+  Object.keys(state).forEach((key) => delete state[key]);
+  Object.assign(state, parsed);
+  currentStep = 0;
+  render();
+  const label = sourceLabel || parsed.id || "MXI file";
+  showImportStatus(`Loaded ${label} — ${parsed.products.length} product(s), ${parsed.files.length} file(s).`);
+}
+
+function loadExampleState(example) {
+  applyImportedState({ ...defaultState(), ...example });
 }
 
 function renderBasics() {
@@ -238,9 +278,16 @@ function renderProducts() {
           </label>
           <label>Product name
             <select data-product-field="name" ${mode === "familyname" ? "disabled" : ""}>
-              ${(productMeta?.names || [product.name])
-                .map((n) => `<option value="${esc(n)}" ${n === product.name ? "selected" : ""}>${esc(n)}</option>`)
-                .join("")}
+              ${(() => {
+                const names = productMeta?.names || [];
+                const options = names.map(
+                  (n) => `<option value="${esc(n)}" ${n === product.name ? "selected" : ""}>${esc(n)}</option>`
+                );
+                if (product.name && !names.includes(product.name)) {
+                  options.unshift(`<option value="${esc(product.name)}" selected>${esc(product.name)} (custom)</option>`);
+                }
+                return options.join("") || `<option value="${esc(product.name)}">${esc(product.name)}</option>`;
+              })()}
             </select>
           </label>
           <label>Min version <span class="req">*</span>
@@ -590,7 +637,7 @@ copyBtn.addEventListener("click", async () => {
 });
 
 loadExampleBtn.addEventListener("click", () => {
-  Object.assign(state, {
+  loadExampleState({
     id: "com.wedia.wxm",
     name: "Wedia CC PlugIns",
     version: "2024.5.0",
@@ -611,7 +658,22 @@ loadExampleBtn.addEventListener("click", () => {
     dependencies: [],
     updateUrl: "",
   });
-  render();
+});
+
+uploadBtn.addEventListener("click", () => uploadInput.click());
+
+uploadInput.addEventListener("change", async () => {
+  const file = uploadInput.files?.[0];
+  uploadInput.value = "";
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const parsed = parseMxi(text);
+    applyImportedState(parsed, file.name);
+  } catch (err) {
+    showImportStatus(err.message || "Failed to load MXI file.", true);
+  }
 });
 
 render();

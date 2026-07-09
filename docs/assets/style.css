@@ -376,6 +376,32 @@ textarea {
   align-items: flex-start;
 }
 
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.sidebar-actions .btn-secondary {
+  width: 100%;
+}
+
+.import-status {
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(62, 207, 142, 0.1);
+  border: 1px solid rgba(62, 207, 142, 0.25);
+  color: var(--success);
+}
+
+.import-status.error {
+  background: rgba(255, 107, 107, 0.08);
+  border-color: rgba(255, 107, 107, 0.25);
+  color: var(--danger);
+}
+
 .repeat-card {
   border: 1px solid var(--border);
   border-radius: 10px;
