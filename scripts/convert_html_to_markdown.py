@@ -73,6 +73,40 @@ def clean_markdown(text: str) -> str:
     return text.strip() + "\n"
 
 
+def _is_indented(tag) -> bool:
+    style = tag.get("style", "")
+    return "margin-left" in style
+
+
+def _is_monospace_span(tag) -> bool:
+    if tag.name != "span":
+        return False
+    if "code" in tag.get("class", []):
+        return True
+    style = tag.get("style", "")
+    return "Courier New" in style or "courier" in style.lower()
+
+
+def preprocess_html(content) -> None:
+    """Restore semantic structure lost by naive HTML-to-Markdown conversion."""
+    for span in content.find_all(_is_monospace_span):
+        text = span.get_text()
+        if not text.strip():
+            span.decompose()
+            continue
+        code = content.new_tag("code")
+        code.string = text
+        span.replace_with(code)
+
+    for p in content.find_all("p", style=True):
+        if not _is_indented(p):
+            continue
+        blockquote = content.new_tag("blockquote")
+        p.insert_before(blockquote)
+        blockquote.append(p.extract())
+        del p["style"]
+
+
 def extract_content(soup: BeautifulSoup):
     for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
@@ -85,6 +119,8 @@ def extract_content(soup: BeautifulSoup):
     content = soup.select_one("#root_content_flex_items_position")
     if content is None:
         content = soup.select_one(".helpxMain-article") or soup.body
+
+    preprocess_html(content)
 
     markdown = md(
         str(content),

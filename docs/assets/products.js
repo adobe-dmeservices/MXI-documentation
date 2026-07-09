@@ -162,6 +162,7 @@ export function defaultState() {
     description: "A short description of what this extension does.",
     useCdata: true,
     license: "Copyright 2024 Example Corp. All rights reserved.",
+    licenseUseCdata: true,
     uiAccess: "",
     files: [
       {

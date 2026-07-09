@@ -316,6 +316,87 @@ label {
   font-size: 0.92rem;
 }
 
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.rich-editor {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rich-editor .ql-toolbar.ql-snow {
+  background: var(--surface);
+  border: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.rich-editor .ql-container.ql-snow {
+  border: none;
+  font-family: var(--font);
+  font-size: 0.95rem;
+}
+
+.rich-editor .ql-editor {
+  min-height: 140px;
+  color: var(--text);
+}
+
+.rich-editor-compact .ql-editor {
+  min-height: 90px;
+}
+
+.rich-editor .ql-editor.ql-blank::before {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.rich-editor .ql-snow .ql-stroke {
+  stroke: var(--muted);
+}
+
+.rich-editor .ql-snow .ql-fill {
+  fill: var(--muted);
+}
+
+.rich-editor .ql-snow .ql-picker {
+  color: var(--muted);
+}
+
+.rich-editor .ql-snow.ql-toolbar button:hover,
+.rich-editor .ql-snow.ql-toolbar button.ql-active,
+.rich-editor .ql-snow .ql-toolbar button:hover,
+.rich-editor .ql-snow .ql-toolbar button.ql-active {
+  color: var(--accent);
+}
+
+.rich-editor .ql-snow.ql-toolbar button:hover .ql-stroke,
+.rich-editor .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.rich-editor .ql-snow .ql-toolbar button:hover .ql-stroke,
+.rich-editor .ql-snow .ql-toolbar button.ql-active .ql-stroke {
+  stroke: var(--accent);
+}
+
+.rich-editor .ql-snow.ql-toolbar button:hover .ql-fill,
+.rich-editor .ql-snow.ql-toolbar button.ql-active .ql-fill,
+.rich-editor .ql-snow .ql-toolbar button:hover .ql-fill,
+.rich-editor .ql-snow .ql-toolbar button.ql-active .ql-fill {
+  fill: var(--accent);
+}
+
+.rich-editor .ql-snow a {
+  color: var(--accent);
+}
+
 input,
 select,
 textarea {

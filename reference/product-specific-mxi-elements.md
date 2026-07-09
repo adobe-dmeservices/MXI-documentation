@@ -10,17 +10,17 @@ Elements that define changes to the menus, shortcuts, server behaviors or format
 
 | Container | Can contain |
 | --- | --- |
-| configuration-changes    (Top-level container for changes to different parts of the Dreamweaver and Flash configuration.) | - data-source-changes - documenttype-changes - extensions-changes - ftp-extension-map-changes - insertbar-changes - menu-insert - server-behavior-changes - server-format-changes - server-format- - definition-changes - shortcut-insert - toolbar-changes - toolpanel-changes (Flash only) |
-| data-source-changes | - menu-insert |
-| documenttype-changes | - documenttype-insert |
-| extensions-changes | - extension-insert |
-| ftp-extension-map-changes | - ftp-extension-insert |
-| insertbar-changes | - insertbar-insert - insertbar-item-insert |
-| server-behavior-changes | - menu-insert |
-| server-format-changes | - menu-insert |
-| server-format-definition-changes | - menu-insert |
-| toolbar-changes | - toolbar-insert - toolbar-item-insert |
-| toolpanel-changes (Flash only) | - toolpanel-item-insert |
+| `configuration-changes`    (Top-level container for changes to different parts of the Dreamweaver and Flash configuration.) | - `data-source-changes` - `documenttype-changes` - `extensions-changes` - `ftp-extension-map-changes` - `insertbar-changes` - `menu-insert` - `server-behavior-changes` - `server-format-changes` - `server-format-` - `definition-changes` - `shortcut-insert` - `toolbar-changes` - `toolpanel-changes (Flash only)` |
+| `data-source-changes` | - `menu-insert` |
+| `documenttype-changes` | - `documenttype-insert` |
+| `extensions-changes` | - `extension-insert` |
+| `ftp-extension-map-changes` | - `ftp-extension-insert` |
+| `insertbar-changes` | - `insertbar-insert` - `insertbar-item-insert` |
+| `server-behavior-changes` | - `menu-insert` |
+| `server-format-changes` | - `menu-insert` |
+| `server-format-definition-changes` | - `menu-insert` |
+| `toolbar-changes` | - `toolbar-insert` - `toolbar-item-insert` |
+| `toolpanel-changes` (Flash only) | - `toolpanel-item-insert` |
 
 # configuration-changes
 
@@ -28,39 +28,39 @@ This is the top-level container for elements that define changes to the menus, s
 
 The following elements can be children of this container:
 
-data-source-changes
+> `data-source-changes`
 
-documenttype-changes
+> `documenttype-changes`
 
-extensions-changes
+> `extensions-changes`
 
-ftp-extension-map-changes
+> `ftp-extension-map-changes`
 
-insertbar-changes
+> `insertbar-changes`
 
-menu-insertserver-behavior-changes
+> `menu-insertserver-behavior-changes`
 
-server-format-changes
+> `server-format-changes`
 
-server-format-definition-changes
+> `server-format-definition-changes`
 
-shortcut-insert
+> `shortcut-insert`
 
-toolbar-changes
+> `toolbar-changes`
 
-toolpanel-changes (Flash only)
+> `toolpanel-changes (Flash only)`
 
 # data-source-changes
 
-This is a deprecated feature. Install Deprecated\_ServerBehaviorsPanel\_Support.zxp in $Dreamweaverapp\configuration\DisabledFeatures\ folder before use the element.
+This is a deprecated feature. Install `Deprecated_ServerBehaviorsPanel_Support.zxp` in `$Dreamweaverapp\configuration\DisabledFeatures\` folder before use the element.
 
-Container for changes to menus in the DataSources.xml file in any of the Dreamweaver Configuration/DataSources/servermodel folders. Can contain any combination of menu-insert elements.
+Container for changes to menus in the DataSources.xml file in any of the Dreamweaver Configuration/DataSources/servermodel folders. Can contain any combination of `menu-insert` elements.
 
-Attributes: servermodelfolder
+Attributes: `servermodelfolder`
 
-servermodelfolder
+`servermodelfolder`
 
-Required. The name of the server-model folder in which the changes are to be made. Case sensitive.  Can be the name of any installed server model, such as "ASP.NET\_Csharp", ASP.NET\_VB", "ASP\_Js", "ASP\_Vbs", "ColdFusion", "UD4-ColdFusion", "PHP\_MySQL" or "JSP".
+> Required. The name of the server-model folder in which the changes are to be made. Case sensitive.  Can be the name of any installed server model, such as "ASP.NET\_Csharp", ASP.NET\_VB", "ASP\_Js", "ASP\_Vbs", "ColdFusion", "UD4-ColdFusion", "PHP\_MySQL" or "JSP".
 
 # documenttype-changes
 
@@ -71,19 +71,19 @@ Container for elements that describe changes to be made to the MMDocumentTypes.x
 
 **E****x****ample**
 
-<documenttype-changes>
+`<documenttype-changes>`
 
-    <documenttype-insert>
+`<documenttype-insert>`
 
-        <documenttype>
+`<documenttype>`
 
-            ...
+`...`
 
-        </documenttype>
+`</documenttype>`
 
-    </documenttype-insert>
+`</documenttype-insert>`
 
-</documenttype-changes>
+`</documenttype-changes>`
 
 #### documenttype-insert
 
@@ -100,15 +100,15 @@ Optional. The language for this configuration value.
 
 **Example**
 
-<documenttype-insert>
+`<documenttype-insert>`
 
-    <documenttype>
+`<documenttype>`
 
-        ...
+`...`
 
-    </documenttype>
+`</documenttype>`
 
-</documenttype-insert>
+`</documenttype-insert>`
 
 **documenttype**
 
@@ -129,13 +129,13 @@ Container for elements that describe changes to be made to the Extensions.txt fi
 
 **Example**
 
-<extensions-changes>
+`<extensions-changes>`
 
-    <extension-insert extension="JS" description="JavaScript Documents" >
+`<extension-insert extension="JS" description="JavaScript Documents" >`
 
-    </extension-insert>
+`</extension-insert>`
 
-</extension-changes>
+`</extension-changes>`
 
 **e****x****t****e****n****sion-insert**
 
@@ -190,7 +190,7 @@ Required. The file type for Mac OS. If you do not know the file type, use “???
 
 **Example**
 
-<ftp-extension-insert extension="JPG" type="ASCII" mac-creator ="MKBY" mac-file-type="JPEG" />
+`<ftp-extension-insert extension="JPG" type="ASCII" mac-creator ="MKBY" mac-file-type="JPEG" />`
 
 # insertbar-changes
 
@@ -202,27 +202,27 @@ Contained in the configuration-changes element.
 
 **E****x****ample**
 
-<insertbar-changes>
+`<insertbar-changes>`
 
-    <insertbar-insert insertBefore|insertAfter="*category\_id*">
+`<insertbar-insert insertBefore|insertAfter="category_id">`
 
-        <category ...>
+`<category ...>`
 
-            <*itemtype*.../>
+`<itemtype.../>`
 
-        </category>
+`</category>`
 
-    </insertbar-insert>
+`</insertbar-insert>`
 
-<insertbar-item-insert
+`<insertbar-item-insert`
 
-insertBefore|insertAfter|appendTo|prependTo="*category\_or\_item\_id*" category="*category\_id*">
+`insertBefore|insertAfter|appendTo|prependTo="category_or_item_id" category="category_id">`
 
-        <*itemtype*.../>
+`<itemtype.../>`
 
-    </insertbar-item-insert>
+`</insertbar-item-insert>`
 
-</insertbar-changes>
+`</insertbar-changes>`
 
 **insertbar-insert**
 
@@ -262,19 +262,19 @@ Required. A unique identifier for the new category.
 
 **E****x****ample**
 
-<insertbar-changes>
+`<insertbar-changes>`
 
-    <insertbar-insert insertBefore|insertAfter="category\_id">
+`<insertbar-insert insertBefore|insertAfter="category_id">`
 
-        <category folder="Cat" id="DW\_Insertbar\_Cat">
+`<category folder="Cat" id="DW_Insertbar_Cat">`
 
-            <button file="cat/cat.htm" id="DW\_Insertbar\_Cat\_Cat1" image="cat cat.gif" />
+`<button file="cat/cat.htm" id="DW_Insertbar_Cat_Cat1" image="cat cat.gif" />`
 
-        </category>
+`</category>`
 
-    </insertbar-insert>
+`</insertbar-insert>`
 
-</insertbar-changes>
+`</insertbar-changes>`
 
 insertbar-item-insert
 
@@ -332,25 +332,25 @@ A single menu-insert element can contain any number of menus or menu features. S
 
 Use the following XML:
 
-<menu-insert insertAfter="DWMenu\_Insert\_GetMoreObjects">
+`<menu-insert insertAfter="DWMenu_Insert_GetMoreObjects">`
 
-    <menu name="Animals" id="DWMenu\_Insert\_Animals" />
+`<menu name="Animals" id="DWMenu_Insert_Animals" />`
 
-</menu-insert>
+`</menu-insert>`
 
-<menu-insert appendTo="DWMenu\_Insert\_Animals">
+`<menu-insert appendTo="DWMenu_Insert_Animals">`
 
-    <menu name="Dog" id="DWMenu\_Insert\_Animals\_Dog" />
+`<menu name="Dog" id="DWMenu_Insert_Animals_Dog" />`
 
-    <menuitem name="Cat" id="DWMenu\_Insert\_Animals\_Cat" />
+`<menuitem name="Cat" id="DWMenu_Insert_Animals_Cat" />`
 
-</menu-insert>
+`</menu-insert>`
 
-<menu-insert appendTo="DWMenu\_Insert\_Animals\_Dog">
+`<menu-insert appendTo="DWMenu_Insert_Animals_Dog">`
 
-    <menuitem name="Poodle" id="DWMenu\_Insert\_Animals\_Dog\_Poodle" />
+`<menuitem name="Poodle" id="DWMenu_Insert_Animals_Dog_Poodle" />`
 
-</menu-insert>
+`</menu-insert>`
 
 **A****TT****R****IBUTES****:** {insertAfter|insertBefore} | {appendTo, prependTo}, [skipSeparator, xml:lang]
 
@@ -397,9 +397,9 @@ Optional. The platform in which this list appears, one of "mac" or "win". If not
 
 **E****x****ample**
 
-<menu name = "My \_Menu", id = "DWMenu\_myMenu", platform = "win">
+`<menu name = "My _Menu", id = "DWMenu_myMenu", platform = "win">`
 
-</menu>
+`</menu>`
 
 #### menubar
 
@@ -424,9 +424,9 @@ Optional. The platform in which this list appears, one of "mac" or "win". If not
 
 **E****x****ample**
 
-<menubar name = "My Menubar", id = "DWMenu\_myMenubar" >
+`<menubar name = "My Menubar", id = "DWMenu_myMenubar" >`
 
-</menubar>
+`</menubar>`
 
 **menuitem**
 
@@ -486,7 +486,7 @@ Optional. A localized-string identifier for the item name to display. Used only 
 
 **E****x****ample**
 
-<menuitem name = "My Menu Item", id = "DWMenu\_myMenu\_myMenuItem" key = "Cmd+Alt+Shift+M" platform = "mac" file = "commands/common/myMenuItem.htm" dynamic = "false" />
+`<menuitem name = "My Menu Item", id = "DWMenu_myMenu_myMenuItem" key = "Cmd+Alt+Shift+M" platform = "mac" file = "commands/common/myMenuItem.htm" dynamic = "false" />`
 
 #### separator
 
@@ -512,13 +512,13 @@ Provides a comment about an item being inserted into the menu structure. Extensi
 
 **E****x****ample**
 
-<comment>This command is part of the MyFeature extension.</comment>
+`<comment>This command is part of the MyFeature extension.</comment>`
 
 # server-behavior-changes
 
 Note:
 
-This is a deprecated feature. Ensure that you install Deprecated\_ServerBehaviorsPanel\_Support.zxp in $Dreamweaverapp\configuration\DisabledFeatures\ folder beforehand.
+This is a deprecated feature. Ensure that you install `Deprecated_ServerBehaviorsPanel_Support.zxp` in `$Dreamweaverapp\configuration\DisabledFeatures\` folder beforehand.
 
 Container for elements that describe changes to menus in the ServerBehaviors.xml file in any of the Dreamweaver Configuration/ServerFormats/*servermodel* folders.
 
@@ -620,7 +620,7 @@ Optional. The platform in which this shortcut appears, one of "mac" or "win". If
 
 **E****x****ample**
 
-<shortcut key = "Shift+F5" id = "ShortCutTest" command = "dw.newDocument()" />
+`<shortcut key = "Shift+F5" id = "ShortCutTest" command = "dw.newDocument()" />`
 
 # toolbar-changes
 
@@ -637,25 +637,25 @@ Optional. The name of the toolbar configuration file to modify. Default is Toolb
 
 **E****x****ample**
 
-<toolbar-changes [file="*file\_name*"]>
+`<toolbar-changes [file="file_name"]>`
 
-    <toolbar-insert>
+`<toolbar-insert>`
 
-        <toolbar ...>
+`<toolbar ...>`
 
-        ...    
+`...`
 
-        </toolbar>
+`</toolbar>`
 
-    </toolbar-insert>
+`</toolbar-insert>`
 
-    <toolbar-item-insert insertBefore|insertAfter|appendTo|prependTo="*toolbar\_or\_item\_id*" toolbar="*toolbar\_id*">
+`<toolbar-item-insert insertBefore|insertAfter|appendTo|prependTo="toolbar_or_item_id" toolbar="toolbar_id">`
 
-    <itemtype.../>
+`<itemtype.../>`
 
-    </toolbar-item-insert>
+`</toolbar-item-insert>`
 
-</toolbar-changes>
+`</toolbar-changes>`
 
 #### toolbar-insert
 
@@ -740,8 +740,8 @@ Optional. The language for this configuration value.
 
 **E****x****ample**
 
-<toolpanel-changes>
+`<toolpanel-changes>`
 
-    <toolpanel-item-insert name="polystar" position="7" />
+`<toolpanel-item-insert name="polystar" position="7" />`
 
-</toolpanel-changes>
+`</toolpanel-changes>`
