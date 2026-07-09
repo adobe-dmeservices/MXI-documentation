@@ -67,9 +67,13 @@ function indent(level, text) {
 function buildProductsXml() {
   return state.products
     .map((product) => {
+      const meta = PRODUCTS.find(
+        (p) => p.familyname === product.familyname || p.names.includes(product.name)
+      );
+      const useFamilyname = product.mode === "familyname" && (product.familyname || meta?.familyname);
       const attrs = [];
-      if (product.mode === "familyname" && product.familyname) {
-        attrs.push(`familyname="${esc(product.familyname)}"`);
+      if (useFamilyname) {
+        attrs.push(`familyname="${esc(product.familyname || meta?.familyname)}"`);
       } else if (product.name) {
         attrs.push(`name="${esc(product.name)}"`);
       }
@@ -211,6 +215,8 @@ function renderProducts() {
         (p) => p.familyname === product.familyname || p.names.includes(product.name)
       );
       const cepInfo = productMeta ? productMeta.cepHosts.join(" / ") : "—";
+      const supportsFamilyname = Boolean(productMeta?.familyname);
+      const mode = supportsFamilyname ? product.mode : "name";
       return `
       <div class="repeat-card" data-product-index="${index}">
         <div class="repeat-card-header">
@@ -225,13 +231,13 @@ function renderProducts() {
             <span class="help">CEP Host ID: ${esc(cepInfo)}</span>
           </label>
           <label>Targeting mode
-            <select data-product-field="mode">
-              <option value="familyname" ${product.mode === "familyname" ? "selected" : ""}>familyname (Mac + Win 64-bit)</option>
-              <option value="name" ${product.mode === "name" ? "selected" : ""}>name (specific product)</option>
+            <select data-product-field="mode" ${supportsFamilyname ? "" : "disabled"}>
+              ${supportsFamilyname ? `<option value="familyname" ${mode === "familyname" ? "selected" : ""}>familyname (Mac + Win 64-bit)</option>` : ""}
+              <option value="name" ${mode === "name" ? "selected" : ""}>name (specific product)</option>
             </select>
           </label>
           <label>Product name
-            <select data-product-field="name" ${product.mode === "familyname" ? "disabled" : ""}>
+            <select data-product-field="name" ${mode === "familyname" ? "disabled" : ""}>
               ${(productMeta?.names || [product.name])
                 .map((n) => `<option value="${esc(n)}" ${n === product.name ? "selected" : ""}>${esc(n)}</option>`)
                 .join("")}
@@ -256,7 +262,7 @@ function renderProducts() {
               <option value="64" ${product.bit === "64" ? "selected" : ""}>64-bit</option>
             </select>
           </label>
-          <label class="checkbox-inline"><input type="checkbox" data-product-field="required" ${product.required ? "checked" : ""}> Required product</label>
+          <label class="checkbox-field"><input type="checkbox" data-product-field="required" ${product.required ? "checked" : ""}> Required product</label>
         </div>
       </div>`;
     })
@@ -268,7 +274,7 @@ function renderProducts() {
     <p class="intro">Select which Adobe applications can install this extension. MXI product names differ from CEP Host IDs used in <code>manifest.xml</code>.</p>
     <div id="products-list">${cards}</div>
     <button type="button" class="btn-secondary" id="btn-add-product">+ Add product</button>
-    <p class="note">CEP-only hosts not in archived MXI docs: ${esc(cepNote)}. See <a href="${REFERENCE_URL}" target="_blank" rel="noopener">supported applications</a>.</p>`;
+    ${cepNote ? `<p class="note">Additional CEP host without a confirmed MXI identifier: ${esc(cepNote)}. See <a href="${REFERENCE_URL}" target="_blank" rel="noopener">supported applications</a>.</p>` : ""}`;
 }
 
 function renderContent() {
@@ -452,6 +458,7 @@ function bindFormEvents() {
             state.products[index].familyname = meta.familyname || "";
             state.products[index].name = meta.names[0];
             state.products[index].version = meta.defaultVersion;
+            state.products[index].mode = meta.familyname ? "familyname" : "name";
           }
         } else if (field === "required") {
           state.products[index][field] = el.checked;

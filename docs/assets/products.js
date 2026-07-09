@@ -68,6 +68,30 @@ export const PRODUCTS = [
     pathToken: "$flash",
   },
   {
+    label: "Bridge",
+    familyname: "Bridge",
+    names: ["Bridge"],
+    cepHosts: ["KBRG"],
+    defaultVersion: "9",
+    pathToken: null,
+  },
+  {
+    label: "After Effects",
+    familyname: null,
+    names: ["AfterEffects"],
+    cepHosts: ["AEFT"],
+    defaultVersion: "17",
+    pathToken: null,
+  },
+  {
+    label: "Audition",
+    familyname: null,
+    names: ["Audition"],
+    cepHosts: ["AUDT"],
+    defaultVersion: "13",
+    pathToken: null,
+  },
+  {
     label: "Lightroom Classic",
     familyname: null,
     names: ["LightroomClassic"],
@@ -78,9 +102,6 @@ export const PRODUCTS = [
 ];
 
 export const CEP_ONLY_HOSTS = [
-  { label: "After Effects", hostId: "AEFT", defaultVersion: "17" },
-  { label: "Audition", hostId: "AUDT", defaultVersion: "13" },
-  { label: "Bridge", hostId: "KBRG", defaultVersion: "10" },
   { label: "Rush", hostId: "RUSH", defaultVersion: "1.2" },
 ];
 

@@ -13,6 +13,9 @@ Use these values in `<product name="...">` or `<product familyname="...">` insid
 
 | Application | MXI `name` values | MXI `familyname` | Notes |
 | --- | --- | --- | --- |
+| Bridge | `Bridge` | `Bridge` | Confirmed in production Exchange packages |
+| After Effects | `AfterEffects` | — | Used with CEP host `AEFT`; not in archived HelpX docs |
+| Audition | `Audition` | — | Used with CEP host `AUDT`; not in archived HelpX docs |
 | Dreamweaver | `Dreamweaver` | — | |
 | Flash / Animate | `Flash` | — | Legacy MXI name; Animate successors use CEP `FLPR` |
 | Illustrator | `Illustrator`, `Illustrator32`, `Illustrator64` | `Illustrator` | `familyname` valid CS6+; targets Mac + Win 64-bit |
@@ -28,7 +31,7 @@ Use these values in `<product name="...">` or `<product familyname="...">` insid
 | Attribute | Values | Description |
 | --- | --- | --- |
 | `name` | See table above | Required unless `familyname` is set |
-| `familyname` | `Photoshop`, `Illustrator`, `InDesign`, `InCopy` | Installs to both Mac and Win 64-bit variants |
+| `familyname` | `Photoshop`, `Illustrator`, `InDesign`, `InCopy`, `Bridge` | Installs to both Mac and Win 64-bit variants where applicable |
 | `version` | Major version number | Minimum supported product version (see version table below) |
 | `maxversion` | Major[.minor] | Maximum supported product version |
 | `required` | `true` / `false` | Whether the product is required (default `false`) |
@@ -47,15 +50,15 @@ Use these in `CSXS/manifest.xml` inside `<Host Name="..." Version="..."/>`.
 | InCopy | `AICY` | `InCopy`, `InCopy32`, `InCopy64` |
 | Premiere Pro | `PPRO` | `Premiere` |
 | Prelude | `PRLD` | `Prelude` |
-| After Effects | `AEFT` | *(not documented in archived MXI docs)* |
+| After Effects | `AEFT` | `AfterEffects` |
 | Animate (Flash Pro) | `FLPR` | `Flash` |
-| Audition | `AUDT` | *(not documented in archived MXI docs)* |
+| Audition | `AUDT` | `Audition` |
 | Dreamweaver | `DRWV` | `Dreamweaver` |
-| Bridge | `KBRG` | *(not documented in archived MXI docs)* |
+| Bridge | `KBRG` | `Bridge` |
 | Lightroom Classic | `LTRM` | `LightroomClassic` |
-| Rush | `RUSH` | *(not documented in archived MXI docs)* |
+| Rush | `RUSH` | *(not confirmed in production MXI files)* |
 
-> **Note:** After Effects, Audition, Bridge, and Rush appear in the [CEP 12 supported applications table](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_12.x/Documentation/CEP%2012%20HTML%20Extension%20Cookbook.md#applications-integrated-with-cep) but are **not listed** in the archived Adobe HelpX MXI product reference. CEP extensions for those hosts may still require an MXI for Exchange distribution — verify product targeting empirically.
+> **Note:** `Bridge`, `AfterEffects`, and `Audition` are used in production Exchange MXI files but were not listed in the archived Adobe HelpX product reference. `Rush` appears in the CEP 12 supported applications table but has no confirmed MXI identifier yet.
 
 ## MXI version numbers
 
@@ -94,6 +97,21 @@ From the CEP 12 cookbook (marketing version → CEP runtime):
 | Dreamweaver | DRWV | 19 | 20 | TBD |
 | Bridge | KBRG | 9 | 10 | TBD |
 | Rush | RUSH | 1 | 1.2.1 | TBD |
+
+## Example: multi-host CEP extension
+
+From a production Adobe Exchange package (`com.adobe.custom-metadata-cep.mxi`):
+
+```xml
+<products>
+    <product familyname="Bridge" version="9"/>
+    <product familyname="Photoshop" version="20"/>
+    <product familyname="Illustrator" version="23"/>
+    <product name="Premiere" version="14"/>
+    <product familyname="InDesign" version="16"/>
+    <product name="LightroomClassic" version="10"/>
+</products>
+```
 
 ## Example: targeting Photoshop and InDesign
 
