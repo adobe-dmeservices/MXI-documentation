@@ -20,8 +20,10 @@
       <ol id="step-list"></ol>
       <p class="help" style="margin-top: 1rem;">Work through each section to build your <code>.mxi</code> file line by line. The XML preview updates live.</p>
       <div class="sidebar-actions">
-        <input type="file" id="mxi-upload-input" class="file-input-hidden" accept=".mxi,.xml,text/xml,application/xml">
-        <label class="btn-secondary upload-trigger" for="mxi-upload-input">Upload .mxi to edit</label>
+        <label class="btn-secondary upload-trigger">
+          Upload .mxi to edit
+          <input type="file" id="mxi-upload-input" class="file-input-hidden" accept=".mxi,.xml,text/xml,application/xml">
+        </label>
         <button type="button" class="btn-secondary" id="btn-load-example">Load Wedia example</button>
       </div>
       <p class="help import-status" id="import-status" hidden></p>
@@ -51,6 +53,6 @@
     </aside>
   </main>
 
-  <script type="module" src="assets/builder.js"></script>
+  <script type="module" src="assets/builder.js?v=3"></script>
 </body>
 </html>

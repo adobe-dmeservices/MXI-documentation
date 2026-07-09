@@ -7,7 +7,7 @@ import {
   STEPS,
   defaultState,
 } from "./products.js";
-import { parseMxi } from "./mxi-parser.js";
+import { parseMxi } from "./mxi-parser.js?v=3";
 
 const REFERENCE_URL =
   "https://github.com/adobe-dmeservices/MXI-documentation/blob/main/reference/supported-applications.md";
@@ -39,7 +39,11 @@ function loadState() {
 }
 
 function saveState() {
-  localStorage.setItem("mxi-builder-state", JSON.stringify(state));
+  try {
+    localStorage.setItem("mxi-builder-state", JSON.stringify(state));
+  } catch {
+    /* ignore storage failures (private mode, quota, etc.) */
+  }
 }
 
 function esc(value) {
@@ -206,11 +210,45 @@ function showImportStatus(message, isError = false) {
   importStatusEl.classList.toggle("error", isError);
 }
 
+function readFileText(file) {
+  if (typeof file.text === "function") {
+    return file.text();
+  }
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result ?? ""));
+    reader.onerror = () => reject(new Error("Failed to read the selected file."));
+    reader.readAsText(file);
+  });
+}
+
+async function handleMxiUpload(file) {
+  if (!file) return;
+
+  showImportStatus(`Reading ${file.name}...`);
+
+  try {
+    const text = await readFileText(file);
+    const parsed = parseMxi(text);
+    applyImportedState(parsed, file.name);
+  } catch (err) {
+    showImportStatus(err.message || "Failed to load MXI file.", true);
+  }
+}
+
 function applyImportedState(parsed, sourceLabel) {
   Object.keys(state).forEach((key) => delete state[key]);
   Object.assign(state, parsed);
   currentStep = 0;
-  render();
+
+  try {
+    render();
+  } catch (err) {
+    showImportStatus(err.message || "Failed to render imported MXI.", true);
+    throw err;
+  }
+
   const label = sourceLabel || parsed.id || "MXI file";
   showImportStatus(`Loaded ${label} — ${parsed.products.length} product(s), ${parsed.files.length} file(s).`);
 }
@@ -659,19 +697,18 @@ loadExampleBtn?.addEventListener("click", () => {
   });
 });
 
-uploadInput?.addEventListener("change", async () => {
-  const file = uploadInput.files?.[0];
-  if (!file) return;
+function initUpload() {
+  if (!uploadInput) return;
 
-  try {
-    const text = await file.text();
-    const parsed = parseMxi(text);
-    applyImportedState(parsed, file.name);
-  } catch (err) {
-    showImportStatus(err.message || "Failed to load MXI file.", true);
-  } finally {
-    uploadInput.value = "";
-  }
-});
+  uploadInput.addEventListener("change", () => {
+    const file = uploadInput.files?.[0];
+    void handleMxiUpload(file);
+    window.setTimeout(() => {
+      uploadInput.value = "";
+    }, 0);
+  });
+}
+
+initUpload();
 
 render();

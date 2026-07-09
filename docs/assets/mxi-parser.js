@@ -1,7 +1,19 @@
 import { PRODUCTS, defaultState } from "./products.js";
 
 function childElement(parent, tagName) {
-  return [...parent.children].find((el) => el.localName === tagName) || null;
+  const wanted = tagName.toLowerCase();
+  return (
+    [...parent.children].find(
+      (el) => el.localName?.toLowerCase() === wanted || el.tagName?.toLowerCase() === wanted
+    ) || null
+  );
+}
+
+function childElements(parent, tagName) {
+  const wanted = tagName.toLowerCase();
+  return [...parent.children].filter(
+    (el) => el.localName?.toLowerCase() === wanted || el.tagName?.toLowerCase() === wanted
+  );
 }
 
 function textContent(el, tagName) {
@@ -70,9 +82,7 @@ export function parseMxi(xmlText) {
 
   const root =
     doc.querySelector("macromedia-extension") ||
-    doc.documentElement?.localName === "macromedia-extension"
-      ? doc.documentElement
-      : null;
+    (doc.documentElement?.localName === "macromedia-extension" ? doc.documentElement : null);
 
   if (!root) {
     throw new Error("No <macromedia-extension> root element found.");
@@ -84,20 +94,14 @@ export function parseMxi(xmlText) {
   const uiAccess = textContent(root, "ui-access");
 
   const productsEl = childElement(root, "products");
-  const products = productsEl
-    ? [...productsEl.children].filter((el) => el.localName === "product").map(parseProduct)
-    : [];
+  const products = productsEl ? childElements(productsEl, "product").map(parseProduct) : [];
 
   const filesEl = childElement(root, "files");
-  const files = filesEl
-    ? [...filesEl.children].filter((el) => el.localName === "file").map(parseFile)
-    : [];
+  const files = filesEl ? childElements(filesEl, "file").map(parseFile) : [];
 
   const dependencyEl = childElement(root, "dependency");
   const dependencies = dependencyEl
-    ? [...dependencyEl.children]
-        .filter((el) => el.localName === "extension")
-        .map((el) => ({ name: el.getAttribute("name") || "" }))
+    ? childElements(dependencyEl, "extension").map((el) => ({ name: el.getAttribute("name") || "" }))
     : [];
 
   const updateEl = childElement(root, "update");
