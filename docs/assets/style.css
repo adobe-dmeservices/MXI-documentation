@@ -122,7 +122,8 @@ pre {
 
 .btn,
 button.btn-primary,
-button.btn-secondary {
+button.btn-secondary,
+label.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -142,7 +143,8 @@ button.btn-primary {
 }
 
 .btn-secondary,
-button.btn-secondary {
+button.btn-secondary,
+label.btn-secondary {
   background: var(--surface-2);
   color: var(--text);
   border-color: var(--border);
@@ -465,15 +467,11 @@ textarea {
 }
 
 .sidebar-actions .btn-secondary,
-.sidebar-actions .upload-trigger {
+.sidebar-actions label.btn-secondary {
   width: 100%;
 }
 
 .upload-trigger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
   text-align: center;
 }
 
