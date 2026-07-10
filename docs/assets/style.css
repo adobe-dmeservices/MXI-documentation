@@ -435,7 +435,8 @@ textarea {
 
 .checkbox-group,
 .checkbox-inline,
-.checkbox-field {
+.checkbox-field,
+label:has(> input[type="checkbox"]) {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
@@ -446,7 +447,8 @@ textarea {
 }
 
 .checkbox-field input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
+.checkbox-inline input[type="checkbox"],
+label:has(> input[type="checkbox"]) input[type="checkbox"] {
   width: auto;
   flex-shrink: 0;
   margin: 0;

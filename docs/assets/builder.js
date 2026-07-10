@@ -298,9 +298,9 @@ function renderBasics() {
         <span class="help">Relative path; file should install to $ExtensionSpecificEMStore</span>
       </label>
       <div class="checkbox-group">
-        <label><input type="checkbox" data-field="forceQuit" ${state.forceQuit ? "checked" : ""}> Force quit target app before install</label>
-        <label><input type="checkbox" data-field="requiresRestart" ${state.requiresRestart ? "checked" : ""}> Requires restart after install</label>
-        <label><input type="checkbox" data-field="isMultilingual" ${state.isMultilingual ? "checked" : ""}> Multilingual extension</label>
+        <label class="checkbox-field"><input type="checkbox" data-field="forceQuit" ${state.forceQuit ? "checked" : ""}> Force quit target app before install</label>
+        <label class="checkbox-field"><input type="checkbox" data-field="requiresRestart" ${state.requiresRestart ? "checked" : ""}> Requires restart after install</label>
+        <label class="checkbox-field"><input type="checkbox" data-field="isMultilingual" ${state.isMultilingual ? "checked" : ""}> Multilingual extension</label>
       </div>
     </div>`;
 }
