@@ -18,6 +18,11 @@ import {
 const REFERENCE_URL =
   "https://github.com/adobe-dmeservices/MXI-documentation/blob/main/reference/supported-applications.md";
 
+function labelCaption(text, required = false) {
+  const star = required ? ' <span class="req">*</span>' : "";
+  return `<span class="field-label">${text}${star}</span>`;
+}
+
 const state = loadState();
 let currentStep = 0;
 
@@ -275,17 +280,17 @@ function loadExampleState(example) {
 function renderBasics() {
   return `
     <div class="field-grid">
-      <label>Extension ID <span class="req">*</span>
+      <label>${labelCaption("Extension ID", true)}
         <input type="text" data-field="id" value="${esc(state.id)}" placeholder="com.company.extension" required>
         <span class="help">Reverse-DNS identifier, e.g. com.adobe.sample</span>
       </label>
-      <label>Display name <span class="req">*</span>
+      <label>${labelCaption("Display name", true)}
         <input type="text" data-field="name" value="${esc(state.name)}" required>
       </label>
-      <label>Version <span class="req">*</span>
+      <label>${labelCaption("Version", true)}
         <input type="text" data-field="version" value="${esc(state.version)}" placeholder="1.0.0" required>
       </label>
-      <label>Author <span class="req">*</span>
+      <label>${labelCaption("Author", true)}
         <input type="text" data-field="author" value="${esc(state.author)}" required>
       </label>
       <label>Icon path
@@ -342,7 +347,7 @@ function renderProducts() {
               })()}
             </select>
           </label>
-          <label>Min version <span class="req">*</span>
+          <label>${labelCaption("Min version", true)}
             <input type="text" data-product-field="version" value="${esc(product.version)}" placeholder="21">
             <span class="help">Internal major version — see <a href="${REFERENCE_URL}" target="_blank" rel="noopener">version table</a></span>
           </label>
@@ -413,7 +418,7 @@ function renderFiles() {
           <button type="button" class="btn-text" data-action="remove-file" ${state.files.length === 1 ? "disabled" : ""}>Remove</button>
         </div>
         <div class="field-grid">
-          <label>Source path <span class="req">*</span>
+          <label>${labelCaption("Source path", true)}
             <input type="text" data-file-field="source" value="${esc(file.source)}" placeholder="my-extension.zxp" required>
             <span class="help">Path relative to the MXI/ZXP package root</span>
           </label>
