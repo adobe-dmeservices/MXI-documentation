@@ -391,8 +391,8 @@ function renderContent() {
         <label class="checkbox-field"><input type="checkbox" data-field="useCdata" ${state.useCdata ? "checked" : ""}> Wrap description in CDATA (recommended)</label>
       </div>
       <div class="field-block">
-        <span class="field-label">License agreement <span class="req">*</span></span>
-        <p class="help">License text displayed during installation. HTML is supported via CDATA.</p>
+        <span class="field-label">License agreement <span class="optional">optional</span></span>
+        <p class="help">Optional license text displayed during installation. HTML is supported via CDATA.</p>
         <div id="license-editor" class="rich-editor rich-editor-compact"></div>
         <label class="checkbox-field"><input type="checkbox" data-field="licenseUseCdata" ${state.licenseUseCdata ? "checked" : ""}> Wrap license in CDATA (recommended)</label>
       </div>
@@ -502,7 +502,6 @@ function validateState() {
   if (!state.version.trim()) issues.push("Version is required.");
   if (!state.author.trim()) issues.push("Author is required.");
   if (htmlIsEmpty(state.description)) issues.push("Description is required.");
-  if (htmlIsEmpty(state.license)) issues.push("License agreement is required.");
   if (!state.products.length) issues.push("At least one product is required.");
   state.products.forEach((p, i) => {
     if (!p.version.trim()) issues.push(`Product ${i + 1}: min version is required.`);
